@@ -4,15 +4,15 @@ import axios from "axios"
 
  const addtransaction=(props)=>{
     const {addExpense}=props
-   const [text, setText] = useState("");
+   const [title, settitle] = useState("");
    const[amount,setAmount] =useState(0)
    const[error,setError]=useState({})
-   
+
    const handleSubmit =(event) =>{
     event.preventDefault()
     let err={}
-    if (text.length<3){
-            err.text='Title should be atleast 3 char long'
+    if (title.length<3){
+            err.title='Title should be atleast 3 char long'
          
            }
            if(!amount){
@@ -23,9 +23,9 @@ import axios from "axios"
             setError({...err})
             return
            }
-           axios.post('https://expensetracker-kc8w.onrender.com/get-entries/add-entry',{"text":text,"amount":amount})
-           addExpense(text,parseInt(amount))
-       setText('')
+            
+          addExpense(title,parseInt(amount))
+       settitle('')
        setAmount(0)
    }
   
@@ -36,10 +36,10 @@ import axios from "axios"
             <div className="form-control">
                 <div className='add'>
             <label>Text</label>
-            <input value={text}  onChange={(event)=>{setText(event.target.value) 
+            <input value={title}  onChange={(event)=>{settitle(event.target.value) 
             setError({error,title:''})} }
-            placeholder="Enter Text..." type="text"></input>
-           {error.text ? <div className="error">{error.text}</div>:null}
+            placeholder="Enter Title..." type="title"></input>
+           {error.title ? <div className="error">{error.title}</div>:null}
             <label>Amount</label>
             <input  value ={amount}onChange={(event)=>setAmount(event.target.value)}placeholder="Enter Amount..." type="number"/>
             {error.amount ? <div className="error">{error.amount}</div>:null}

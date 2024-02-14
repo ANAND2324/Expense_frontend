@@ -18,11 +18,11 @@ useEffect(()=>{
   
 },[])
 
-const addExpense =(text,amount)=>{
+const addExpense =(title,amount)=>{
   
   var nextid= expenses.length===0?1:expenses[expenses.length-1].id+1
-  setExpense([...expenses,{id:nextid, title:text,amount:amount}])
-
+  setExpense([...expenses,{id:nextid, title:title,amount:amount}])
+  axios.post('https://expensetracker-kc8w.onrender.com/add-entry',{"title":title,"amount":parseInt(amount)})
   
 }
 const deleteExpense=(id)=>{
@@ -41,7 +41,7 @@ expenses.forEach((exp)=>{
   return(
     <>
 <div>Expense tracker</div>
-<div className="Balance">Balance: {income-expense}</div>
+<div className="Balance">Balance: {income+expense}</div>
       <div className="Income-expense-container">
       <div className="Income">
         <span className="title">Income</span>
